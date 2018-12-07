@@ -1,0 +1,25 @@
+<!-- home.html -->
+
+{% load staticfiles %}
+
+<div align="center">
+	Hello, {{profile.5.profile_name}}
+</div>
+
+<div align="center">
+	<h2> Enter your given User Id </h2>
+	<input type="text">
+	<br> <br>
+	<form method="GET" action="{% url 'detail_site' %}">
+    	<button type="submit">View</button>
+	</form>
+
+	<h2> Create an Account </h2>
+	<form method="GET" action="{% url 'create_account' %}">
+		<button type="submit">Create</button>
+	</form>
+</div>
+
+<div>
+
+</div>

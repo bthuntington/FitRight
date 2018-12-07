@@ -1,0 +1,37 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'design/account.css' %}">
+
+<div class="row">
+  <div class="column">
+  	<h1> Enter Info </h1>
+  	<form class = options>
+  		Name: <input type="text", name="name">
+  		<br><br>
+  		Age: <input type="text", name="age">
+  		<br><br>
+  		Gender
+  		<select>
+  			<option value="male"> Male</option>
+  			<option value="female"> Female</option>
+  			<!-- <option value="other"> Other</option> -->
+  		</select>
+  		<br><br>
+  	</form>
+  	<h2>Clothing Preferences</h2>
+  	<form class = options>
+  		Style
+  		<select>
+  			<option value=""> </option>
+  			<option value=""> </option>
+  			<option value=""> </option>
+  		</select>
+  	</form>
+
+
+  </div>
+  <div class="column">
+  	
+  	<input type="submit" name="Create Account">
+  </div>
+</div>
