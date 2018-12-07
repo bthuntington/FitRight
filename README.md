@@ -12,5 +12,5 @@ If you don't, then install it
 3. Then type in python3 manage.py runserver
 If that doesn't work, try just python manage.py runserver
 
-4 It will give you an address that you can copy and paste into a web browser
+4. It will give you an address that you can copy and paste into a web browser
 Add home/ the end of the address and that'll take you to the website
