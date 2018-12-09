@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS lower_body;
 DROP TABLE IF EXISTS pattern;
 DROP TABLE IF EXISTS material;
 DROP TABLE IF EXISTS color;
-DROP TABLE IF EXISTS product_line;
+DROP TABLE IF EXISTS product_item;
 DROP TABLE IF EXISTS clothing_preferance;
 DROP TABLE IF EXISTS profile;
 
@@ -14,7 +14,7 @@ CREATE TABLE profile(
 	profile_name VARCHAR(50) NOT NULL,
 	password VARCHAR(50) NOT NULL,
 	gender VARCHAR(6),
-	age INT(3),
+	age INT(5),
 	PRIMARY KEY(profile_id, profile_name)
 	
 ) ENGINE = InnoDB;
@@ -66,24 +66,26 @@ INSERT INTO clothing_preferance VALUES
 --https://en.wikipedia.org/wiki/Fashion_design
 --
 --
-CREATE TABLE product_line(
+CREATE TABLE product_item(
 	brand_id INT(3) NOT NULL,
 	brand_name VARCHAR(50) NOT NULL,
+	product_name VARCHAR(30),
 	material VARCHAR(50),
 	pattern VARCHAR(50),
 	color VARCHAR(50),
 	lightness INT(1),
+	price INT(8),
 	
 	PRIMARY KEY (brand_id, brand_name),
 	FOREIGN KEY (brand_id, brand_name) REFERENCES profile(profile_id, profile_name)
 	
 ) ENGINE = InnoDB;
 
-INSERT INTO product_line VALUES 
-(05, "Gucci", "silk", "print", "white", 8),
-(06, "Nike", "spandex", "textile", "green", 5),
-(07, "Calvin Klein", "leather", "dots", "red", 4),
-(08, "Old Navy", "cotton", "stripes", "black", 7)
+INSERT INTO product_item VALUES 
+(05, "Gucci", "shirt", "silk", "print", "white", 8, 60),
+(06, "Nike", "yoga pants", "spandex", "textile", "green", 5, 80),
+(07, "Calvin Klein", "jacket", "leather", "dots", "red", 4, 150),
+(08, "Old Navy", "pants", "cotton", "stripes", "black", 7, 20)
 ;
 
 --This is a list of the colors used in clothing by each brand. This list 
@@ -100,7 +102,7 @@ CREATE TABLE color(
 	c_id INT (3),
 	c_name VARCHAR (50),
 	lightness int(1) DEFAULT (5),
-		CONSTRAINT CHK_lighness CHECK (lightness IN (0, 1, 2, 3, 4, 5, 6,
+		CONSTRAINT CHK_lightness CHECK (lightness IN (0, 1, 2, 3, 4, 5, 6,
 		7, 8, 9)),
 	color_type VARCHAR(17) NOT NULL,
 		CONSTRAINT CHK_color_type CHECK (color_type IN ('red', 'blue', 
@@ -108,7 +110,7 @@ CREATE TABLE color(
 		'pink',	'violet', 'purple', 'orange', 'brown' )),
 	
 	PRIMARY KEY (c_id, color_type),
-	FOREIGN KEY (c_id, c_name) REFERENCES product_line (brand_id, brand_name)
+	FOREIGN KEY (c_id, c_name) REFERENCES product_item (brand_id, brand_name)
 	
 ) ENGINE = InnoDB;
 
@@ -155,7 +157,7 @@ CREATE TABLE material(
 		'recycled cotton', 'bamboo', 'jute', 'hemp', 'tyvek')),
 	
 	PRIMARY KEY (m_id, material_type),
-	FOREIGN KEY (m_id, m_name) REFERENCES product_line (brand_id, brand_name)
+	FOREIGN KEY (m_id, m_name) REFERENCES product_item (brand_id, brand_name)
 ) ENGINE = InnoDB;
 
 INSERT INTO material VALUES 
@@ -202,7 +204,7 @@ CREATE TABLE pattern(
 		'camouflage', 'semmetrical', 'spirals', 'waves', 'bubbles', 'cracks',
 		'lines', 'zigzag', 'fractals', 'plain', 'print')),
 	PRIMARY KEY (p_id, pattern_type),
-	FOREIGN KEY (p_id, p_name) REFERENCES product_line (brand_id, brand_name)
+	FOREIGN KEY (p_id, p_name) REFERENCES product_item (brand_id, brand_name)
 
 ) ENGINE = InnoDB;
 

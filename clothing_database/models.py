@@ -92,10 +92,11 @@ class ClothingPreferance(models.Model):
 
 
 class Color(models.Model):
-    c = models.ForeignKey('ProductLine', models.DO_NOTHING, primary_key=True, related_name="color_set")
-    c_name = models.ForeignKey('ProductLine', models.DO_NOTHING, db_column='c_name', blank=True, null=True, related_name="color_name_set")
+    c = models.OneToOneField('ProductItem', models.DO_NOTHING, primary_key=True, related_name="color_set")
+    c_name = models.ForeignKey('ProductItem', models.DO_NOTHING, db_column='c_name', blank=True, null=True, related_name="color_name_set")
     lightness = models.IntegerField(blank=True, null=True)
     color_type = models.CharField(max_length=17)
+
 
     class Meta:
         managed = False
@@ -148,7 +149,7 @@ class DjangoSession(models.Model):
 
 
 class LowerBody(models.Model):
-    lb = models.ForeignKey('Profile', models.DO_NOTHING, primary_key=True, related_name="lb_set")
+    lb = models.OneToOneField('Profile', models.DO_NOTHING, primary_key=True, related_name="lb_set")
     lb_name = models.ForeignKey('Profile', models.DO_NOTHING, db_column='lb_name', related_name="lb_name_set")
     size_def = models.CharField(max_length=2, blank=True, null=True)
     chest = models.FloatField(blank=True, null=True)
@@ -169,8 +170,8 @@ class LowerBody(models.Model):
 
 
 class Material(models.Model):
-    m = models.OneToOneField('ProductLine', models.DO_NOTHING, related_name="m_set", primary_key=True)
-    m_name = models.ForeignKey('ProductLine', models.DO_NOTHING, related_name="m_name", db_column='m_name', blank=True, null=True)
+    m = models.OneToOneField('ProductItem', models.DO_NOTHING, related_name="m_set", primary_key=True)
+    m_name = models.ForeignKey('ProductItem', models.DO_NOTHING, related_name="m_name", db_column='m_name', blank=True, null=True)
     material_type = models.CharField(max_length=17)
 
     class Meta:
@@ -178,10 +179,12 @@ class Material(models.Model):
         db_table = 'material'
         unique_together = (('m', 'material_type'),)
 
+    # def __str__(self):
+    #     return "%s" % (self.m_name)
 
 class Pattern(models.Model):
-    p = models.ForeignKey('ProductLine', models.DO_NOTHING, primary_key=True, related_name="p_set")
-    p_name = models.ForeignKey('ProductLine', models.DO_NOTHING, db_column='p_name', blank=True, null=True, related_name="product_name_set")
+    p = models.OneToOneField('ProductItem', models.DO_NOTHING, primary_key=True, related_name="p_set")
+    p_name = models.ForeignKey('ProductItem', models.DO_NOTHING, db_column='p_name', blank=True, null=True, related_name="product_name_set")
     pattern_type = models.CharField(max_length=20)
 
     class Meta:
@@ -189,18 +192,35 @@ class Pattern(models.Model):
         db_table = 'pattern'
         unique_together = (('p', 'pattern_type'),)
 
+    # def __str__(self):
+  #     return "%s" % (self.p_name)
 
-class ProductLine(models.Model):
-    brand = models.ForeignKey('Profile', models.DO_NOTHING, primary_key=True, related_name="brand_set")
+COLOR_CHOICES = (
+    ('green', 'Green'),
+    ('yellow', 'Yellow'),
+    ( 'black', 'Black'),
+    ('red', 'Red'),
+    ('brown', 'Brown'),
+    ('white', 'White'),
+    ('grey', 'Grey'),
+    ('blue', 'Blue')
+    )
+class ProductItem(models.Model):
+    brand = models.OneToOneField('Profile', models.DO_NOTHING, primary_key=True, related_name="brand_set")
     brand_name = models.ForeignKey('Profile', models.DO_NOTHING, db_column='brand_name', related_name="brand_name_set")
+    product_name = models.CharField(max_length=30, blank=True, null=True)
     material = models.CharField(max_length=50, blank=True, null=True)
     pattern = models.CharField(max_length=50, blank=True, null=True)
-    color = models.CharField(max_length=50, blank=True, null=True)
+    color = models.CharField(max_length=50, choices=COLOR_CHOICES, blank=True, null=True)
     lightness = models.IntegerField(blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True)
+
+    # def __str__(self):
+    #     return "%s" % (self.color)
 
     class Meta:
         managed = False
-        db_table = 'product_line'
+        db_table = 'product_item'
         unique_together = (('brand', 'brand_name'),)
 
 
@@ -216,18 +236,12 @@ class Profile(models.Model):
         db_table = 'profile'
         unique_together = (('profile_id', 'profile_name'),)
 
-
-class Test(models.Model):
-    id = models.IntegerField(primary_key=True)
-    val = models.CharField(max_length=3, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'test'
+    # def __str__(self):
+    #     return "%s %s" % (self.first_name, self.last_name)
 
 
 class UpperBody(models.Model):
-    ub = models.ForeignKey(Profile, models.DO_NOTHING, primary_key=True, related_name="ub_set")
+    ub = models.OneToOneField(Profile, models.DO_NOTHING, primary_key=True, related_name="ub_set")
     ub_name = models.ForeignKey(Profile, models.DO_NOTHING, db_column='ub_name')
     waist = models.FloatField(blank=True, null=True)
     hips = models.FloatField(blank=True, null=True)

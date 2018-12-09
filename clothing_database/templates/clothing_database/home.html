@@ -10,7 +10,7 @@
 	<h2> Enter your given User Id </h2>
 	<input type="text">
 	<br> <br>
-	<form method="GET" action="{% url 'detail_site' %}">
+	<form method="GET" action="{% url 'view_database' %}">
     	<button type="submit">View</button>
 	</form>
 
@@ -21,5 +21,7 @@
 </div>
 
 <div>
-
+	{% for user in profile %}
+		{{user.profile_name}}
+	{% endfor %}
 </div>
