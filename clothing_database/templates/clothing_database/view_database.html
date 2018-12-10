@@ -1,1 +1,63 @@
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'design/database_design.css' %}">
+
+<div class="input">
+  <a href=" /clothing_database/home/ " style="color: black; font-weight: bold">Back</a>
+  <br><br>
+  <div class = "title">
+     Welcome {{ user.profile_name}}
+     <br><br>
+     Your id is: {{user.profile_id}}
+  </div>
+  <form action="/clothing_database/home/database/" method="POST">
+    {% csrf_token %}
+    <h3> Filter By Preference:</h3>
+    Color<input type="checkbox", name="color", value="color"> 
+    <br><br>
+    Material<input type="checkbox", name="material"> 
+    <br><br>
+    Brand Name<input type="checkbox", name="brand_name"> 
+    <br><br>
+    Pattern<input type="checkbox", name="pattern"> 
+    <br><br>
+    Lightness<input type="checkbox", name = "lightness"> 
+    <br><br>
+    <input type="submit" name="Submit", style="background-color: grey;border-radius: 15px" >
+  </form>
+
+</div>
+
+<form action="" >
+
+    {{ form.as_p }}
+</form>
+
+<div class="list">
+    {% block content %}
+      {% if product_list %}
+      <ol id="elementStyle">
+        {% for product in product_list %}
+          <li>
+            <div class = "title">
+                {{ product.product_name|linebreaks}}
+            </div>
+            <div class = "">
+                <b>Price: </b>{{product.price}}
+                <b>Color: </b> {{product.color}}
+                <b>Material: </b> {{product.material}}
+                <b>Brand Name: </b> {{product.brand_name}}
+                <b>Pattern: </b> {{product.pattern}}
+                <b>Lightness: </b> {{product.lightness}}
+                <!-- <a href="https://www.gucci.com/ " target="_blank">Go to site</a> -->
+            </div>
+            
+             
+            <!-- <p class = "workflow" > Workflow Standin</p> -->
+          </li>
+        {% endfor %}
+      </ol>
+      {% else %}
+        <p>There are no products in the system.</p>
+      {% endif %}       
+    {% endblock %}
+</div>

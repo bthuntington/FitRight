@@ -4,7 +4,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="{% static 'design/account.css' %}">
-<form class = options action="" method="POST" name="Form">
+<form class = options action="" method="POST">
 <div class="row">
   <div class="column">
   	<h1> Enter Info </h1>
@@ -60,7 +60,7 @@
       </select>
       <br><br>
       Patttern:
-      <select name = "material">
+      <select name = "pattern">
         <option value="textile"> Textile</option>
         <option value="plain"> Plain</option>
         <option value="semmetrical"> Semmetrical</option>
@@ -93,7 +93,7 @@
   </div>
   <div class="column">
   	<h1> Enter Measurements </h1>
-    <h3> Upper Body </h3>
+    <h3> Lower Body </h3>
     Waist: <input type="text", name="waist"> <br><br>
     Hips: <input type="text", name="hips"> <br><br>
     Thigh: <input type="text", name="thigh"> <br><br>
@@ -107,7 +107,7 @@
 
   </div>
   <div class="column">
-    <h3> Lower Body </h3>
+    <h3> Upper Body </h3>
       General Size: <input type="text", name="size_def"> <br><br>
       Chest: <input type="text", name="chest"> <br><br>
       Neck to Wrist: <input type="text", name="neck_to_wrist"> <br><br>

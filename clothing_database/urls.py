@@ -19,7 +19,7 @@ from clothing_database import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.home, name='home'),
+    path('home/', views.view_database, name='home'),
     path('home/create_account/', views.create_account, name='create_account'),
-    path('home/database/', views.view_database, name='view_database'),
+    path('home/database/', views.DatabaseListView.as_view(), name='database'),
 ]

@@ -3,12 +3,8 @@ from .models import Color, Material, Pattern, LowerBody
 from .models import UpperBody, ProductItem, ClothingPreferance, Profile
 
 
-# class PreferencesForm(forms.Form):
-# 	# fit = forms.ModelChoiceField(queryset=ClothingPreferance.fit)
-# 	colorlist = forms.ModelChoiceField(queryset=Color.objects.all()) 
-# 	material = forms.ModelChoiceField(queryset=Material.objects.all())
-# 	pattern = forms.ModelChoiceField(queryset=Pattern.objects.all())
-
-# 	# class Meta:
-# 	# 	model = ProductItem
-# 	# 	fields=['color']
+class PreferencesForm(forms.Form):
+    color = forms.BooleanField(required=False)
+    pattern = forms.BooleanField(required=False)
+    material = forms.BooleanField(required=False)
+    price = forms.BooleanField(required=False)

@@ -1,0 +1,30 @@
+.list {
+	/*list-style-type: none;*/
+	text-align: center;
+	align-items:center;
+    padding: 20px 70px 10px 0px;; 
+    background-color: white;
+    margin:0 10%;
+	width:80%;
+	min-height:500px;
+	height: 80%;
+
+}
+
+#elementStyle li {
+	display: table;
+	float: center;
+	text-align: left;
+	list-style-type: none;
+    padding: 10px;
+	border: 1px dashed;
+	width: 100%;
+  }
+
+  .title {
+	text-align: center;
+}
+
+.input {
+	float: left;
+}

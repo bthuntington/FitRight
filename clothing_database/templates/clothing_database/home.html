@@ -3,14 +3,15 @@
 {% load staticfiles %}
 
 <div align="center">
-	Hello, {{profile.5.profile_name}}
+	Hello, user
 </div>
 
 <div align="center">
 	<h2> Enter your given User Id </h2>
-	<input type="text">
 	<br> <br>
-	<form method="GET" action="{% url 'view_database' %}">
+	<form method="POST">
+		{% csrf_token %}
+		<input type="text" name='profile_id'>
     	<button type="submit">View</button>
 	</form>
 
@@ -24,4 +25,5 @@
 	{% for user in profile %}
 		{{user.profile_name}}
 	{% endfor %}
+
 </div>

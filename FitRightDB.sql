@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS product_item;
 DROP TABLE IF EXISTS clothing_preferance;
 DROP TABLE IF EXISTS profile;
 
---This table holds the user id, full name, password, gender, age.
+-- This table holds the user id, full name, password, gender, age.
 CREATE TABLE profile(
 	profile_id INT(3) NOT NULL,
 	profile_name VARCHAR(50) NOT NULL,
@@ -33,7 +33,7 @@ INSERT INTO profile VALUES
 --
 --
 --
---Sources:
+-- Sources:
 --
 --
 CREATE TABLE clothing_preferance(
@@ -62,8 +62,8 @@ INSERT INTO clothing_preferance VALUES
 --
 --
 --
---sources:
---https://en.wikipedia.org/wiki/Fashion_design
+-- sources:
+-- https://en.wikipedia.org/wiki/Fashion_design
 --
 --
 CREATE TABLE product_item(
@@ -84,20 +84,20 @@ CREATE TABLE product_item(
 INSERT INTO product_item VALUES 
 (05, "Gucci", "shirt", "silk", "print", "white", 8, 60),
 (06, "Nike", "yoga pants", "spandex", "textile", "green", 5, 80),
-(07, "Calvin Klein", "jacket", "leather", "dots", "red", 4, 150),
-(08, "Old Navy", "pants", "cotton", "stripes", "black", 7, 20)
+(07, "Calvin Klein", "jacket","leather", "dots", "red", 4, 150),
+(08, "Old Navy", "pants","cotton", "stripes", "black", 7, 20)
 ;
 
---This is a list of the colors used in clothing by each brand. This list 
---includeds the three primary colors (red, green, blue), three secondary
---(cyan, magenta, yellow), black, white, grey, brown. With lightness denoting 
---different shades of one color 0=black, color starting at 1 ends at 8 ,white=9
---The defult value for color lightness is 5. IE brown 5 is normal brown.
---Where brown 7 is tan. this is low value, match the color then lightness.
---If lightness values don't match still show the option of it.
---sources:
---https://www.usability.gov/how-to-and-tools/methods/color-basics.html
---https://en.wikipedia.org/wiki/Clothing_material
+-- This is a list of the colors used in clothing by each brand. This list 
+-- includeds the three primary colors (red, green, blue), three secondary
+-- (cyan, magenta, yellow), black, white, grey, brown. With lightness denoting 
+-- different shades of one color 0=black, color starting at 1 ends at 8 ,white=9
+-- The defult value for color lightness is 5. IE brown 5 is normal brown.
+-- Where brown 7 is tan. this is low value, match the color then lightness.
+-- If lightness values don't match still show the option of it.
+-- sources:
+-- https://www.usability.gov/how-to-and-tools/methods/color-basics.html
+-- https://en.wikipedia.org/wiki/Clothing_material
 CREATE TABLE color(
 	c_id INT (3),
 	c_name VARCHAR (50),
@@ -139,14 +139,14 @@ INSERT INTO color VALUES
 ;
 
 
---is a list of materials that are used in clothing. this list is tied to the 
---brand that makes clothing, and is used to check if the user preference 
---is in the list. the user is limited to entering the primary material,
---restricted to cotton, flax, wool, silk, ramie, denim, leather, down, fur,
---rayon, nylon, polyester, spandex, flannel, lyocell, pvc, bamboo, 
---jute, hemp, tyvek, jute. list comes from this link.
---sources:
---https://en.wikipedia.org/wiki/Clothing_material
+-- is a list of materials that are used in clothing. this list is tied to the 
+-- brand that makes clothing, and is used to check if the user preference 
+-- is in the list. the user is limited to entering the primary material,
+-- restricted to cotton, flax, wool, silk, ramie, denim, leather, down, fur,
+-- rayon, nylon, polyester, spandex, flannel, lyocell, pvc, bamboo, 
+-- jute, hemp, tyvek, jute. list comes from this link.
+-- sources:
+-- https://en.wikipedia.org/wiki/Clothing_material
 CREATE TABLE material(
 	m_id INT (3),
 	m_name VARCHAR (50),
@@ -184,18 +184,18 @@ INSERT INTO material VALUES
 (08, "Old Navy", "polyester")
 ;
 
---This is a list of the patterns used by a brand in their clothing. Each brand_id
---and name are linked to a preset pattern that can be selected. Patterns are
---restricted to the values of dots(polka dot, halftone), 
---Textile patterns(adinkra sysmbols, argyle, border tartan, check, glen plaid, 
---gul, harlequin print, tweed, embroidery, houndstooth, paisley, stripes, rain
---tartan, celtic maze), camouflage, symmetrical, fractals, spirals, waves, 
---bubbles, cracks, line, zigzag, plain, print.
---sources:
---https://en.wikipedia.org/wiki/Category:Dot_patterns
---https://en.wikipedia.org/wiki/Category:Textile_patterns
---https://en.wikipedia.org/wiki/Patterns_in_nature
---https://en.wikipedia.org/wiki/Category:Patterns
+-- This is a list of the patterns used by a brand in their clothing. Each brand_id
+-- and name are linked to a preset pattern that can be selected. Patterns are
+-- restricted to the values of dots(polka dot, halftone), 
+-- Textile patterns(adinkra sysmbols, argyle, border tartan, check, glen plaid, 
+-- gul, harlequin print, tweed, embroidery, houndstooth, paisley, stripes, rain
+-- tartan, celtic maze), camouflage, symmetrical, fractals, spirals, waves, 
+-- bubbles, cracks, line, zigzag, plain, print.
+-- sources:
+-- https://en.wikipedia.org/wiki/Category:Dot_patterns
+-- https://en.wikipedia.org/wiki/Category:Textile_patterns
+-- https://en.wikipedia.org/wiki/Patterns_in_nature
+-- https://en.wikipedia.org/wiki/Category:Patterns
 CREATE TABLE pattern(
 	p_id INT (3),
 	p_name VARCHAR (50),
@@ -232,14 +232,15 @@ INSERT INTO pattern VALUES
 (08, "Old Navy", "bubbles")
 ;
 
---Aim to match people based on chest first. Then neck_to_wrist, back_to_waist, arm_length.
---Other values are used for custom items.
---all done in inches
---Sources:
+-- Aim to match people based on chest first. Then neck_to_wrist, back_to_waist, arm_length.
+-- Other values are used for custom items.
+-- all done in inches
+-- Sources:
 --
-CREATE TABLE lower_body(
-	lb_id INT(4) NOT NULL,
-	lb_name VARCHAR(50) NOT NULL,
+CREATE TABLE upper_body(
+	ub_id INT(4) NOT NULL,
+	ub_name VARCHAR(50) NOT NULL,
+	company BOOLEAN,
 	size_def CHAR(2),
 	chest DOUBLE(4,1),
 	neck_to_wrist DOUBLE(4,1),
@@ -252,30 +253,28 @@ CREATE TABLE lower_body(
 	upper_arm DOUBLE(4,1),
 	arm_hole_depth DOUBLE(4,1),
 	
-	PRIMARY KEY (lb_id, lb_name),
-	FOREIGN KEY (lb_id, lb_name) REFERENCES profile (profile_id, profile_name)
+	PRIMARY KEY (ub_id, ub_name),
+	FOREIGN KEY (ub_id, ub_name) REFERENCES profile (profile_id, profile_name)
 ) ENGINE = InnoDB;
 
-INSERT INTO lower_body VALUES 
-(01, "Cole Kenworthy", "L", 36, 45, 33, 35, 7, 4, 8, 27, 15, 7),
-(02, "Leo La Rocca", "XL", 40, 50, 36, 39, 10, 6, 10, 30, 19, 9),
-(03, "Nick Mercadante", "m", 32, 40, 30, 31, 5, 3, 7, 24, 12, 5),
-(04, "Kailee Guerdette", "s", 30, 38, 28, 30, 5, 3, 6, 24, 10, 5),
-(05, "Gucci", "L", 36, 45, 33, 35, 7, 4, 8, 27, 15, 7),
-(06, "Nike", "s", 30, 38, 28, 30, 5, 3, 6, 24, 10, 5),
-(07, "Calvin Klein", "m", 32, 40, 30, 31, 5, 3, 7, 24, 12, 5),
-(08, "Old Navy", "XL", 40, 50, 36, 39, 10, 6, 10, 30, 19, 9);
+INSERT INTO upper_body VALUES 
+(01, "Cole Kenworthy", '0', "L", 36, 45, 33, 35, 7, 4, 8, 27, 15, 7),
+(02, "Leo La Rocca", '0', "XL", 40, 50, 36, 39, 10, 6, 10, 30, 19, 9),
+(03, "Nick Mercadante", '0', "m", 32, 40, 30, 31, 5, 3, 7, 24, 12, 5),
+(04, "Kailee Guerdette", '0', "s", 30, 38, 28, 30, 5, 3, 6, 24, 10, 5),
+(05, "Gucci", '1', "L", 36, 45, 33, 35, 7, 4, 8, 27, 15, 7),
+(06, "Nike", '1', "s", 30, 38, 28, 30, 5, 3, 6, 24, 10, 5),
+(07, "Calvin Klein", '1', "m", 32, 40, 30, 31, 5, 3, 7, 24, 12, 5),
+(08, "Old Navy", '1', "XL", 40, 50, 36, 39, 10, 6, 10, 30, 19, 9);
 
---Value the waist, instep, thigh, side_length for match, +-2 inches is good range
---Other values are used for custom fit clothing
---waist value is from standard sizing ie 32 for men and 0-10 range for women
---All measurements in inches
---Sources:
---
---
-CREATE TABLE upper_body(
-	ub_id INT(4) NOT NULL,
-	ub_name VARCHAR(50) NOT NULL,
+-- Value the waist, instep, thigh, side_length for match, +-2 inches is good range
+-- Other values are used for custom fit clothing
+-- waist value is from standard sizing ie 32 for men and 0-10 range for women
+-- All measurements in inches
+CREATE TABLE lower_body(
+	lb_id INT(4) NOT NULL,
+	lb_name VARCHAR(50) NOT NULL,
+	company BOOLEAN,
 	waist DOUBLE(4,1),
 	hips DOUBLE(4,1),
 	thigh DOUBLE(4,1),
@@ -287,17 +286,17 @@ CREATE TABLE upper_body(
 	crotch_depth DOUBLE(4,1),
 	crotch_length DOUBLE(4,1),
 	
-	PRIMARY KEY (ub_id, ub_name),
-	FOREIGN KEY (ub_id, ub_name) REFERENCES profile(profile_id, profile_name)
+	PRIMARY KEY (lb_id, lb_name),
+	FOREIGN KEY (lb_id, lb_name) REFERENCES profile(profile_id, profile_name)
 	
 ) ENGINE = InnoDB;
 
-INSERT INTO upper_body VALUES 
-(01, "Cole Kenworthy", 32, 33, 25, 15, 14, 30, 16, 35, 10, 12),
-(02, "Leo La Rocca", 34, 35, 24, 15, 12, 32, 18, 37, 12, 14),
-(03, "Nick Mercadante", 30, 28, 20, 13, 10, 28, 14, 33, 8, 10),
-(04, "Kailee Guerdette", 0, 33, 22, 13, 14, 25, 13, 28, 7, 9),
-(05, "Gucci", 32, 33, 25, 15, 14, 30, 16, 35, 10, 12),
-(06, "Nike", 0, 33, 22, 13, 14, 25, 13, 28, 7, 9),
-(07, "Calvin Klein", 30, 28, 20, 13, 10, 28, 14, 33, 8, 10),
-(08, "Old Navy", 34, 35, 24, 15, 12, 32, 18, 37, 12, 14);
+INSERT INTO lower_body VALUES 
+(01, "Cole Kenworthy", '0', 32, 33, 25, 15, 14, 30, 16, 35, 10, 12),
+(02, "Leo La Rocca", '0', 34, 35, 24, 15, 12, 32, 18, 37, 12, 14),
+(03, "Nick Mercadante", '0', 30, 28, 20, 13, 10, 28, 14, 33, 8, 10),
+(04, "Kailee Guerdette", '0', 0, 33, 22, 13, 14, 25, 13, 28, 7, 9),
+(05, "Gucci", '1', 32, 33, 25, 15, 14, 30, 16, 35, 10, 12),
+(06, "Nike", '1', 0, 33, 22, 13, 14, 25, 13, 28, 7, 9),
+(07, "Calvin Klein", '1', 30, 28, 20, 13, 10, 28, 14, 33, 8, 10),
+(08, "Old Navy", '1', 34, 35, 24, 15, 12, 32, 18, 37, 12, 14);
