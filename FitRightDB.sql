@@ -53,10 +53,11 @@ CREATE TABLE clothing_preferance(
 ) ENGINE = InnoDB;
 
 INSERT INTO clothing_preferance VALUES 
-(01, "Cole Kenworthy", "silk", "print", "slim", "white", 9, 10, 200),
+(01, "Cole Kenworthy", "silk", "print", "slim", "black", 9, 10, 200),
 (02, "Leo La Rocca", "cotton", "stripes", "relaxed", "green", 5, 50, 100),
 (03, "Nick Mercadante", "leather", "dots", "regular", "red", 7, 100, 1000),
-(04, "Kailee Guerdette", "spandex", "textile", "slim", "black", 1, 5, 50)
+(04, "Kailee Guerdette", "spandex", "textile", "slim", "white", 1, 5, 50)
+
 ;
 
 --
@@ -67,6 +68,7 @@ INSERT INTO clothing_preferance VALUES
 --
 --
 CREATE TABLE product_item(
+	item_id INT(3) NOT NULL,
 	brand_id INT(3) NOT NULL,
 	brand_name VARCHAR(50) NOT NULL,
 	product_name VARCHAR(30),
@@ -76,17 +78,45 @@ CREATE TABLE product_item(
 	lightness INT(1),
 	price INT(8),
 	
-	PRIMARY KEY (brand_id, brand_name),
+	PRIMARY KEY (item_id, brand_id, brand_name),
 	FOREIGN KEY (brand_id, brand_name) REFERENCES profile(profile_id, profile_name)
 	
 ) ENGINE = InnoDB;
 
 INSERT INTO product_item VALUES 
-(05, "Gucci", "shirt", "silk", "print", "white", 8, 60),
-(06, "Nike", "yoga pants", "spandex", "textile", "green", 5, 80),
-(07, "Calvin Klein", "jacket","leather", "dots", "red", 4, 150),
-(08, "Old Navy", "pants","cotton", "stripes", "black", 7, 20)
-;
+(01, 05, "Gucci", "Shirt", "silk", "print", "white", 8, 60),
+(02, 06, "Nike", "Yoga pants", "spandex", "textile", "green", 5, 80),
+(03, 07, "Calvin Klein", "Jacket","leather", "dots", "red", 4, 150),
+(04, 08, "Old Navy", "Pants","cotton", "stripes", "black", 7, 20),
+(05, 05, "Gucci", "Skinny Jeans","denim", "plain", "blue", 4, 20),
+
+(06, 08, "Old Navy", "Sweatpants","cotton", "camouflage", "black", 7, 20),
+(07, 06, "Nike", "Exercise Pants","spandex", "fractals", "blue", 7, 20),
+(08, 07, "Calvin Klein", "Skirt","flannel", "zigzag", "red", 7, 20),
+(09, 05, "Gucci", "Dress", "rayon", "dots", "black", 7, 20),
+(10, 05, "Gucci", "Shirt", "cotton", "symmetrical", "white", 9, 70),
+(11, 05, "Gucci", "Pants", "rayon", "stripes", "green", 7, 89),
+(12, 05, "Gucci", "Slippers", "pvc", "stripes", "black", 1, 300),
+(13, 05, "Gucci", "Gloves", "leather", "plaid", "brown", 4, 150),
+(14, 05, "Gucci", "Jacket", "leather", "plain", "brown", 3, 200),
+(15, 05, "Gucci", "Suit", "silk", "plaid", "green", 7, 450),
+(16, 06, "Nike", "Shirt", "polyester", "print", "white", 8, 39),
+(17, 06, "Nike", "Shorts", "cotton", "fractals", "red", 5, 49),
+(18, 06, "Nike", "Pants", "cotton", "plain", "black", 3, 60),
+(19, 06, "Nike", "Jacket", "pvc", "lines", "green", 7, 90),
+(20, 06, "Nike", "Shoes", "polyester", "plaid", "green", 7, 250),
+(21, 07, "Calvin Klein", "Suit", "wool", "plain", "blue", 4, 350),
+(22, 07, "Calvin Klein", "Shirt", "silk", "textile", "white", 9, 89),
+(23, 07, "Calvin Klein", "Pants", "silk", "plaid", "blue", 7, 79),
+(24, 07, "Calvin Klein", "Shoes", "leather", "plain", "brown", 5, 250),
+(25, 08, "Old Navy", "Sweatshirt", "cotton", "camouflage", "green", 7, 55),
+(26, 08, "Old Navy", "Shirt", "polyester", "print", "cyan", 4, 35),
+(27, 08, "Old Navy", "Shorts", "cotton", "lines", "yellow", 8, 40),
+(28, 08, "Old Navy", "Jacket", "pvc", "plaid", "magenta", 5, 20),
+(29, 08, "Old Navy", "Socks", "wool", "camouflage", "black", 3, 10),
+(30, 08, "Old Navy", "Jeans", "denim", "plain", "blue", 5, 50),
+(31, 08, "Old Navy", "Jacket", "denim", "print", "blue", 5, 60);
+
 
 -- This is a list of the colors used in clothing by each brand. This list 
 -- includeds the three primary colors (red, green, blue), three secondary

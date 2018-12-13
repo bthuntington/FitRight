@@ -5,10 +5,11 @@
   <a href=" /clothing_database/home/ " style="color: black; font-weight: bold">Back</a>
   <br><br>
   <div class = "title">
-     Welcome {{ user.profile_name}}
-     <br><br>
-     Your id is: {{user.profile_id}}
-  </div>
+      Welcome {{profile_name}}
+      <br><br>
+      Your id is: {{profile_id}}
+
+</div>
   <form action="/clothing_database/home/database/" method="POST">
     {% csrf_token %}
     <h3> Filter By Preference:</h3>
@@ -16,45 +17,63 @@
     <br><br>
     Material<input type="checkbox", name="material"> 
     <br><br>
-    Brand Name<input type="checkbox", name="brand_name"> 
+    Brand Name<input type="checkbox", name="brand"> 
     <br><br>
     Pattern<input type="checkbox", name="pattern"> 
     <br><br>
     Lightness<input type="checkbox", name = "lightness"> 
+    <br><br>
+    Price<input type="checkbox", name = "price"> 
+    <br><br>
+    Lower body Values<input type="checkbox", name = "lb_values"> 
+    <br><br>
+    Upper body Values<input type="checkbox", name = "ub_values"> 
     <br><br>
     <input type="submit" name="Submit", style="background-color: grey;border-radius: 15px" >
   </form>
 
 </div>
 
-<form action="" >
-
-    {{ form.as_p }}
-</form>
 
 <div class="list">
     {% block content %}
       {% if product_list %}
-      <ol id="elementStyle">
-        {% for product in product_list %}
-          <li>
+      {{length}} Results
+        {% if list %}
+          <ol id="elementStyle">
+            {% for product in list %}
+            <li>
             <div class = "title">
-                {{ product.product_name|linebreaks}}
+                  {{ product.product_name|linebreaks}}
             </div>
-            <div class = "">
-                <b>Price: </b>{{product.price}}
-                <b>Color: </b> {{product.color}}
-                <b>Material: </b> {{product.material}}
-                <b>Brand Name: </b> {{product.brand_name}}
-                <b>Pattern: </b> {{product.pattern}}
-                <b>Lightness: </b> {{product.lightness}}
-                <!-- <a href="https://www.gucci.com/ " target="_blank">Go to site</a> -->
-            </div>
-            
-             
-            <!-- <p class = "workflow" > Workflow Standin</p> -->
-          </li>
-        {% endfor %}
+              Price: </b>{{product.price}}
+              <b>Color: </b> {{product.color}}
+              <b>Material: </b> {{product.material}}
+              <b>Brand Name: </b> {{product.brand_name}}
+              <b>Pattern: </b> {{product.pattern}}
+              <b>Lightness: </b> {{product.lightness}} 
+
+            <li>
+            {%endfor%}
+          
+        {% else %}
+        <ol id="elementStyle">
+          {% for product in product_list %}
+            <li>
+              <div class = "title">
+                  {{ product.product_name|linebreaks}}
+              </div>
+              <div class = "">
+                  <b>Price: </b>{{product.price}}
+                  <b>Color: </b> {{product.color}}
+                  <b>Material: </b> {{product.material}}
+                  <b>Brand Name: </b> {{product.brand_name}}
+                  <b>Pattern: </b> {{product.pattern}}
+                  <b>Lightness: </b> {{product.lightness}} 
+              </div>
+            </li>
+          {% endfor %}
+        {% endif%}
       </ol>
       {% else %}
         <p>There are no products in the system.</p>
